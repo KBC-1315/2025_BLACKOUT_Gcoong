@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>활동 배지</title>
+    <link rel="stylesheet" href="badge.css" />
+  </head>
+  <body>
+    <header class="header">
+      <button class="back-btn" onclick="goBack()">←</button>
+      <h1>활동 배지</h1>
+    </header>
+
+    <main class="main-content">
+      <section class="badge-section">
+        <p>루돌프를 구출하고 배지를 모아보세요 <span>😊</span></p>
+      </section>
+
+      <section class="new-badges">
+        <h2>나의 NEW 배지</h2>
+        <div class="new-badge-list">
+          <div class="new-badge">
+            <img src="./img/루돌프수호자s.png" alt="루돌프 수호자" />
+            <p>루돌프 수호자</p>
+          </div>
+          <div class="new-badge">
+            <img src="./img/도로위보안관s.png" alt="도로 위 보안관" />
+            <p>도로 위 보안관</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="all-badges">
+        <h2>모든 배지</h2>
+        <div class="all-badge-list">
+          <div class="all-badge">
+            <img src="./img/도로위보안관s.png" alt="도로 위 보안관" />
+            <p>도로 위 보안관</p>
+          </div>
+          <div class="all-badge locked">
+            <img src="./img/lock.png" alt="라이딩 안내자" />
+            <p>라이딩 안내자</p>
+          </div>
+          <div class="all-badge">
+            <img src="./img/루돌프탐정.png" alt="루돌프 탐정" />
+            <p>루돌프 탐정</p>
+          </div>
+          <div class="all-badge">
+            <img src="./img/루돌프수호자s.png" alt="루돌프 수호자" />
+            <p>루돌프 수호자</p>
+          </div>
+          <div class="all-badge locked">
+            <img src="./img/lock.png" alt="꾸준한 도우미" />
+            <p>꾸준한 도우미</p>
+          </div>
+          <div class="all-badge locked">
+            <img src="./img/lock.png" alt="질서 유지단장" />
+            <p>질서 유지단장</p>
+          </div>
+          <div class="all-badge locked">
+            <img src="./img/lock.png" alt="질서 유지단장" />
+            <p>질서 유지단장</p>
+          </div>
+          <div class="all-badge locked">
+            <img src="./img/lock.png" alt="질서 유지단장" />
+            <p>질서 유지단장</p>
+          </div>
+          <div class="all-badge locked">
+            <img src="./img/lock.png" alt="질서 유지단장" />
+            <p>질서 유지단장</p>
+          </div>
+          <div class="all-badge locked">
+            <img src="./img/lock.png" alt="질서 유지단장" />
+            <p>질서 유지단장</p>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <nav class="nav-bar">
+        <a href="ranking.html" class="nav-item">
+          <div class="icon">
+            <img src="./img/ranking_icon.png" />
+          </div>
+          <span class="label">Ranking</span>
+        </a>
+        <a href="badge.html" class="nav-item">
+          <div class="icon">
+            <img src="./img/badge_icon.png" />
+          </div>
+          <span class="label">Badge</span>
+        </a>
+        <a href="index.html" class="nav-item main">
+          <div class="icon main-icon">
+            <img src="./img/Home.png" alt="Main" />
+          </div>
+        </a>
+        <a href="rudolph.html" class="nav-item">
+          <div class="icon">
+            <img src="./img/rudolph_icon.png" />
+          </div>
+          <span class="label">Rudolph</span>
+        </a>
+        <a href="new_profile.html" class="nav-item">
+          <div class="icon">
+            <img src="./img/profile_icon.png" alt="Profile" />
+          </div>
+          <span class="label">Profile</span>
+        </a>
+      </nav>
+    </footer>
+  </body>
+  <script>
+    // Back 버튼 동작
+    function goBack() {
+      window.history.back(); // index.html로 이동
+    }
+  </script>
+</html>

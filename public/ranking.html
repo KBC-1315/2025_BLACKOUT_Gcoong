@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ranking Page</title>
+    <link rel="stylesheet" href="ranking.css" />
+  </head>
+  <body>
+    <!-- Header -->
+    <header class="header">
+      <button class="back-btn" onclick="goBack()">←</button>
+      <h1>활동 배지</h1>
+    </header>
+
+    <!-- Medals Section -->
+    <div class="medals">
+      <div class="medal-container">
+        <img src="img/silver.png" alt="Gold Medal" class="medal-img" />
+        <div class="medal-box gold">
+          <h3>닉네임1</h3>
+          <p>+80,000P</p>
+        </div>
+      </div>
+      <div class="medal-container">
+        <img src="img/gold.png" alt="Silver Medal" class="medal-img" />
+        <div class="medal-box silver">
+          <h3>닉네임2</h3>
+          <p>+100,000P</p>
+        </div>
+      </div>
+      <div class="medal-container">
+        <img src="img/bronz.png" alt="Bronze Medal" class="medal-img" />
+        <div class="medal-box bronze">
+          <h3>닉네임3</h3>
+          <p>+50,000P</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Ranking List -->
+    <div class="ranking-list">
+      <!-- Repeat ranking items -->
+      <div class="ranking-item">
+        <p class="nickname">1. 닉네임</p>
+        <p class="points">+100,000P</p>
+      </div>
+      <div class="ranking-item">
+        <p class="nickname">2. 닉네임</p>
+        <p class="points">+100,000P</p>
+      </div>
+      <div class="ranking-item">
+        <p class="nickname">3. 닉네임</p>
+        <p class="points">+100,000P</p>
+      </div>
+      <div class="ranking-item">
+        <p class="nickname">4. 닉네임</p>
+        <p class="points">+100,000P</p>
+      </div>
+      <div class="ranking-item">
+        <p class="nickname">5. 닉네임</p>
+        <p class="points">+100,000P</p>
+      </div>
+      <div class="ranking-item">
+        <p class="nickname">6. 닉네임</p>
+        <p class="points">+100,000P</p>
+      </div>
+      <div class="ranking-item">
+        <p class="nickname">7. 닉네임</p>
+        <p class="points">+100,000P</p>
+      </div>
+      <div class="ranking-item">
+        <p class="nickname">8. 닉네임</p>
+        <p class="points">+100,000P</p>
+      </div>
+      <div class="ranking-item">
+        <p class="nickname">9. 닉네임</p>
+        <p class="points">+100,000P</p>
+      </div>
+      <div class="ranking-item">
+        <p class="nickname">10. 닉네임</p>
+        <p class="points">+100,000P</p>
+      </div>
+      <div class="ranking-item">
+        <p class="nickname">11. 닉네임</p>
+        <p class="points">+100,000P</p>
+      </div>
+      <div class="ranking-item">
+        <p class="nickname">12. 닉네임</p>
+        <p class="points">+100,000P</p>
+      </div>
+      <div class="ranking-item">
+        <p class="nickname">13. 닉네임</p>
+        <p class="points">+100,000P</p>
+      </div>
+      <div class="ranking-item">
+        <p class="nickname">14. 닉네임</p>
+        <p class="points">+100,000P</p>
+      </div>
+      <div class="ranking-item">
+        <p class="nickname">15. 닉네임</p>
+        <p class="points">+100,000P</p>
+      </div>
+      <div class="ranking-item">
+        <p class="nickname">16. 닉네임</p>
+        <p class="points">+100,000P</p>
+      </div>
+      <div class="ranking-item">
+        <p class="nickname">17. 닉네임</p>
+        <p class="points">+100,000P</p>
+      </div>
+      <div class="ranking-item">
+        <p class="nickname">18. 닉네임</p>
+        <p class="points">+100,000P</p>
+      </div>
+      <div class="ranking-item">
+        <p class="nickname">19. 닉네임</p>
+        <p class="points">+100,000P</p>
+      </div>
+      <div class="ranking-item">
+        <p class="nickname">20. 닉네임</p>
+        <p class="points">+100,000P</p>
+      </div>
+      <!-- Add more items as needed -->
+    </div>
+
+    <footer class="footer">
+      <nav class="nav-bar">
+        <a href="#" class="nav-item">
+          <div class="icon">
+            <img src="./img/ranking_icon.png" />
+          </div>
+          <span class="label">Ranking</span>
+        </a>
+        <a href="badge.html" class="nav-item">
+          <div class="icon">
+            <img src="./img/badge_icon.png" />
+          </div>
+          <span class="label">Badge</span>
+        </a>
+        <a href="index.html" class="nav-item main">
+          <div class="icon main-icon">
+            <img src="./img/Home.png" alt="Main" />
+          </div>
+        </a>
+        <a href="#" class="nav-item">
+          <div class="icon">
+            <img src="./img/rudolph_icon.png" />
+          </div>
+          <span class="label">Rudolph</span>
+        </a>
+        <a href="new_profile.html" class="nav-item">
+          <div class="icon">
+            <img src="./img/profile_icon.png" alt="Profile" />
+          </div>
+          <span class="label">Profile</span>
+        </a>
+      </nav>
+    </footer>
+    <script>
+      // Back 버튼 동작
+      function goBack() {
+        window.history.back(); // index.html로 이동
+      }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>GcoonG</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <header class="header">
+      <h1>GCoonG</h1>
+    </header>
+
+    <div
+      id="map"
+      style="width: 100%; height: 85vh; border: 1px solid #ddd"
+    ></div>
+
+    <section
+      style="overflow-y: auto"
+      ,
+      class="scooter-section"
+      ,
+      id="scooter-section"
+    >
+      <div class="scooter-card">
+        <img
+          src="https://img.freepik.com/free-psd/beautiful-deer-isolated_23-2151369059.jpg"
+          alt="Scooter Image"
+        />
+        <h2>#SC1192</h2>
+        <p>내 위치로 부터</p>
+        <h4>70m</h4>
+        <button>구출하기</button>
+      </div>
+      <div class="scooter-card">
+        <img
+          src="https://img.freepik.com/free-psd/beautiful-deer-isolated_23-2151369059.jpg"
+          alt="Scooter Image"
+        />
+        <h2>#SC1236</h2>
+        <p>내 위치로 부터</p>
+        <h4>40m</h4>
+        <button>구출하기</button>
+      </div>
+      <div class="scooter-card">
+        <img
+          src="https://img.freepik.com/free-psd/beautiful-deer-isolated_23-2151369059.jpg"
+          alt="Scooter Image"
+        />
+        <h2>#LC1029</h2>
+        <p>내 위치로 부터</p>
+        <h4>407m</h4>
+        <button>구출하기</button>
+      </div>
+      <div class="scooter-card">
+        <img
+          src="https://img.freepik.com/free-psd/beautiful-deer-isolated_23-2151369059.jpg"
+          alt="Scooter Image"
+        />
+        <h2>#KU1028</h2>
+        <p>내 위치로 부터</p>
+        <h4>400m</h4>
+        <button>구출하기</button>
+      </div>
+    </section>
+
+    <div class="rescue-container" id="rescue-container">
+      <!-- Close Button -->
+      <button class="back-btn" onclick="location.href='index.html'">✖</button>
+
+      <!-- Image Section -->
+      <div class="image-container">
+        <img src="./img/rudol_basic.png" alt="기본 루돌프 이미지" />
+      </div>
+
+      <!-- Content Section -->
+      <div class="rescue-content">
+        <h2 id="rescue-id"># 식별번호</h2>
+        <p id="rescue-info">내 위치로부터 거리<br />위치 정보</p>
+        <!-- Button Section -->
+        <div class="rescue-buttons">
+          <a href="index.html" class="cancel">지도 닫기</a>
+          <button class="sound-btn">
+            <img src="./img/bell.png" alt="소리 아이콘" />
+          </button>
+          <a href="page3.html" class="start">구출 시작</a>
+        </div>
+      </div>
+    </div>
+
+    <footer class="footer">
+      <nav class="nav-bar">
+        <a href="ranking.html" class="nav-item">
+          <div class="icon">
+            <img src="./img/ranking_icon.png" />
+          </div>
+          <span class="label">Ranking</span>
+        </a>
+        <a href="badge.html" class="nav-item">
+          <div class="icon">
+            <img src="./img/badge_icon.png" />
+          </div>
+          <span class="label">Badge</span>
+        </a>
+        <a href="index.html" class="nav-item main">
+          <div class="icon main-icon">
+            <img src="./img/Home.png" alt="Main" />
+          </div>
+        </a>
+        <a href="rudolph.html" class="nav-item">
+          <div class="icon">
+            <img src="./img/rudolph_icon.png" />
+          </div>
+          <span class="label">Rudolph</span>
+        </a>
+        <a href="new_profile.html" class="nav-item">
+          <div class="icon">
+            <img src="./img/profile_icon.png" alt="Profile" />
+          </div>
+          <span class="label">Profile</span>
+        </a>
+      </nav>
+    </footer>
+
+    <script
+      type="text/javascript"
+      src="//dapi.kakao.com/v2/maps/sdk.js?appkey=53848e7fb16bc31e6ba34ad83bb65798"
+    ></script>
+
+    <script src="script.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.2/papaparse.min.js"></script>
+
+    <script type="module">
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/9.17.1/firebase-app.js";
+      import {
+        getFirestore,
+        collection,
+        getDocs,
+      } from "https://www.gstatic.com/firebasejs/9.17.1/firebase-firestore.js";
+
+      // Check that it worked and returned a function: // "function"
+      const firebaseConfig = {
+        apiKey: "AIzaSyCrpntgnraatc_6qfSqjzt7uxLEi7lVr8M",
+        authDomain: "gbike-management-sys.firebaseapp.com",
+        projectId: "gbike-management-sys",
+        storageBucket: "gbike-management-sys.firebasestorage.app",
+        messagingSenderId: "340120810848",
+        appId: "1:340120810848:web:ca147b563adcac52051a05",
+        measurementId: "G-0PSVH9KYLG",
+      };
+
+      // Initialize Firebase
+      const app = initializeApp(firebaseConfig);
+      window.bicycleMarkerImage =
+        "https://cdn-icons-png.flaticon.com/512/2223/2223053.png";
+      window.kickboardMarkerImage =
+        "https://cdn-icons-png.flaticon.com/512/5330/5330079.png";
+      // Initialize Cloud Firestore and get a reference to the service
+      const db = getFirestore(app);
+      const dataList = [];
+      async function fetchData() {
+        const dataContainer = document.getElementById("data-container");
+        try {
+          const querySnapshot = await getDocs(collection(db, "bicycles"));
+          querySnapshot.forEach((doc) => {
+            const data = doc.data();
+            dataList.push(data);
+          });
+          // `dataList`를 전역으로 저장
+          window.dataList = dataList;
+
+          // 데이터를 가져온 후 마커 추가 함수 호출
+          addMarkers(window.dataList);
+        } catch (error) {
+          console.error("Error fetching data:", error);
+          dataContainer.textContent = "Error loading data.";
+        }
+      }
+      fetchData();
+    </script>
+  </body>
+</html>

@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>프로필 페이지</title>
+    <link rel="stylesheet" href="new_profile.css" />
+  </head>
+  <body>
+    <header class="header">
+      <button class="back-btn" onclick="goBack()">←</button>
+      <h1>프로필</h1>
+      <button class="share-btn">📤</button>
+    </header>
+
+    <main class="main-content">
+      <!-- 프로필 정보 -->
+      <section class="profile-info">
+        <img class="profile-img" src="./img/santa.png" alt="프로필 이미지" />
+        <h3 id="level">Lv.0</h3>
+        <h2 id="name">김돌프</h2>
+        <p id="profile">춥고, 졸리고, 배고파요...</p>
+        <button class="edit-btn">프로필 수정</button>
+      </section>
+
+      <!-- 포인트 정보 -->
+      <section class="points-section">
+        <h3>GCOONG 포인트</h3>
+        <div class="progress-bar-container">
+          <div class="progress-bar" style="width: 57%" ,id="progress-bar"></div>
+        </div>
+        <p class="points" , id="points">0p</p>
+        <ul class="points-info">
+          <li>루돌프를 도울 때마다 포인트가 지급됩니다.</li>
+          <li>
+            1000p 달성 시 GCooter, GBike에 사용 가능한 포인트로 전환 가능합니다.
+          </li>
+          <li>
+            부정한 방법으로 취득한 포인트가 적발될 시 해당 포인트는 즉시
+            회수됩니다.
+          </li>
+        </ul>
+      </section>
+
+      <!-- 메뉴 리스트 -->
+      <section class="menu-list">
+        <a href="badge.html" class="menu-item">활동 배지 ➔</a>
+        <a href="rudolph.html" class="menu-item">내가 구출한 루돌프 ➔</a>
+        <a href="ranking.html" class="menu-item">포인트 랭킹 ➔</a>
+      </section>
+    </main>
+    <div id="data-container" style="display: none"></div>
+    <footer class="footer">
+      <nav class="nav-bar">
+        <a href="ranking.html" class="nav-item">
+          <div class="icon">
+            <img src="./img/ranking_icon.png" />
+          </div>
+          <span class="label">Ranking</span>
+        </a>
+        <a href="badge.html" class="nav-item">
+          <div class="icon">
+            <img src="./img/badge_icon.png" />
+          </div>
+          <span class="label">Badge</span>
+        </a>
+        <a href="index.html" class="nav-item main">
+          <div class="icon main-icon">
+            <img src="./img/Home.png" alt="Main" />
+          </div>
+        </a>
+        <a href="rudolph.html" class="nav-item">
+          <div class="icon">
+            <img src="./img/rudolph_icon.png" />
+          </div>
+          <span class="label">Rudolph</span>
+        </a>
+        <a href="new_profile.html" class="nav-item">
+          <div class="icon">
+            <img src="./img/profile_icon.png" alt="Profile" />
+          </div>
+          <span class="label">Profile</span>
+        </a>
+      </nav>
+    </footer>
+  </body>
+  <script src="new_profile.js"></script>
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.17.1/firebase-app.js";
+    import {
+      getFirestore,
+      collection,
+      getDocs,
+    } from "https://www.gstatic.com/firebasejs/9.17.1/firebase-firestore.js";
+
+    // Check that it worked and returned a function: // "function"
+    const firebaseConfig = {
+      apiKey: "AIzaSyCrpntgnraatc_6qfSqjzt7uxLEi7lVr8M",
+      authDomain: "gbike-management-sys.firebaseapp.com",
+      projectId: "gbike-management-sys",
+      storageBucket: "gbike-management-sys.firebasestorage.app",
+      messagingSenderId: "340120810848",
+      appId: "1:340120810848:web:ca147b563adcac52051a05",
+      measurementId: "G-0PSVH9KYLG",
+    };
+
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+
+    // Initialize Cloud Firestore and get a reference to the service
+    const db = getFirestore(app);
+    const userList = [];
+    async function fetchData() {
+      const dataContainer = document.getElementById("data-container");
+      try {
+        // 유저 데이터 가져옴
+        const querySnapshotUser = await getDocs(collection(db, "users"));
+        querySnapshotUser.forEach((doc) => {
+          const data = doc.data();
+          userList.push(data);
+        });
+
+        // console.log(userList[0]["name"]);
+        window.userList = userList;
+        updateUserprofile(userList);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+        dataContainer.textContent = "Error loading data.";
+      }
+    }
+    fetchData();
+  </script>
+  <script>
+    function goBack() {
+      window.location.href = "index.html";
+    }
+  </script>
+</html>

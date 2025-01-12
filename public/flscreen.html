@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Flash Screen</title>
+    <style>
+      /* 기본 스타일 */
+      body {
+        margin: 0;
+        padding: 0;
+        font-family: Arial, sans-serif;
+        height: 100vh;
+        background: url('img/bg.png') no-repeat center center/cover;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        overflow: hidden;
+      }
+
+      /* 컨테이너 */
+      .flash-container {
+        position: relative;
+        width: 100%;
+        height: 100%;
+      }
+
+      /* 로고 */
+      .logo {
+        position: absolute;
+        opacity: 0;
+        width: 200px; /* 원하는 크기로 조정 */
+        height: auto;
+        transition: opacity 3s ease-in-out;
+        top: 30%; /* 위치 조정 가능 */
+        left: 50%;
+        transform: translate(-50%, -50%);
+      }
+
+      /* GIF */
+      .gif {
+        position: absolute;
+        opacity: 0;
+        width: 300px; /* 원하는 크기로 조정 */
+        height: auto;
+        bottom: -100px; /* 시작 위치: 화면 아래 */
+        left: 50%;
+        transform: translateX(-50%);
+        transition: transform 1s ease-out, opacity 1s ease-out;
+      }
+
+      /* GIF 올라오는 애니메이션 */
+      .gif.active {
+        transform: translate(-50%, -100px); /* 화면 위로 올라옴 */
+        opacity: 1;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="flash-container">
+      <!-- 로고 -->
+      <img src="img/logo.png" alt="Logo" class="logo" id="logo" />
+      <!-- GIF -->
+      <img src="img/gif1.gif" alt="Animated GIF" class="gif" id="gif" />
+    </div>
+
+    <script>
+      // 로고와 GIF 요소 참조
+      const logo = document.getElementById("logo");
+      const gif = document.getElementById("gif");
+
+      // 로고 서서히 나타나게 설정 (3초)
+      setTimeout(() => {
+        logo.style.opacity = 1;
+      }, 100);
+
+      // GIF 애니메이션 설정 (3초 후 시작)
+      setTimeout(() => {
+        gif.classList.add("active");
+      }, 2000); // 로고 표시 완료 후 GIF 시작
+
+      setTimeout(() => {
+        gif.classList.add("active");
+      }, 2000);
+
+// 일정 시간 후 index.html로 이동
+    setTimeout(() => {
+      window.location.href = "index.html";
+      }, 5000);
+
+    </script>
+  </body>
+</html>

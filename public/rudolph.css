@@ -1,0 +1,231 @@
+/* 기본 리셋 및 폰트 설정 */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+/* 공통 여백 설정 */
+.container {
+  padding: 0 1rem 65px; /* 좌우 여백 */
+  max-width: 100%;
+  margin: 0 auto;
+}
+
+body {
+  font-family: sans-serif;
+  background-color: #fff;
+  color: #333;
+  max-width: 420px; /* 모바일 최적화 폭 */
+  margin: 0 auto;
+  padding: 0 0 60px;
+}
+
+/* 헤더 스타일 */
+header {
+  display: flex;
+  align-items: center;
+  padding: 1rem;
+}
+
+.back-btn {
+  background: none;
+  border: none;
+  font-size: 1.25rem;
+  cursor: pointer;
+  margin-right: 1rem;
+}
+
+.header-title {
+  font-size: 1rem;
+  font-weight: bold;
+}
+
+/* 배너 버튼 스타일 */
+.banner-btn {
+  display: flex; /* 이미지와 텍스트를 나란히 배치 */
+  align-items: center; /* 세로 정렬을 가운데 정렬 */
+  justify-content: space-between; /* 왼쪽(이미지+텍스트)와 오른쪽(화살표)로 분리 */
+  justify-content: left; /* 텍스트와 이미지 가운데 정렬 */
+  text-align: left; /* 텍스트 왼쪽 정렬 */
+  width: 100%;
+  margin: 0 auto 1rem;
+  padding: 0.7rem 1.2rem; /* 위아래 패딩만 늘림 */
+  background-color: #4caf50;
+  color: #fff;
+  text-align: center;
+  border-radius: 8px;
+  text-decoration: none;
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+.banner-btn:hover {
+  background-color: #43a047;
+}
+
+/* 버튼 안의 이미지 (앞에 들어가는 아이콘) */
+.btn-icon {
+  width: 48px; /* 적당한 크기로 조정 */
+  height: 48px;
+  margin: 0rem; /* 텍스트와 이미지 간격 */
+}
+
+/* 화살표 스타일 */
+.arrow-icon {
+  font-size: 1.2rem;
+  margin-left: 0.5rem; /* 텍스트와 화살표 간격 */
+  margin-left: auto;
+}
+
+/* 메인 컨테이너 */
+main {
+  padding: 0 1rem 1rem;
+}
+
+.section-title {
+  font-size: 1.1rem;
+  font-weight: bold;
+  margin-bottom: 0.25rem;
+}
+
+.sub-info {
+  font-size: 0.9rem;
+  color: #666;
+  margin-bottom: 1rem;
+}
+
+/* 카드 그리드 */
+.card-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr; /* 2열 */
+  gap: 1rem;
+  padding: 0;
+}
+
+.card {
+  height: wrap;
+  padding-top: 3rem;
+  padding-bottom: 1rem;
+  text-align: center;
+  border-radius: 12px;
+  color: #fff;
+  flex-direction: column; /* 세로 정렬 */
+  justify-content: center; /* 세로 가운데 정렬 */
+  align-items: center; /* 가로 가운데 정렬 */
+}
+
+/* 카드별 배경 컬러 예시 */
+.blue {
+  background-color: #91c7f9;
+}
+.green {
+  background-color: #a6e6a1;
+}
+.pink {
+  background-color: #f9a5b0;
+}
+.yellow {
+  background-color: #ffd97d;
+}
+
+/* 루돌프 얼굴 이미지(카드 상단) */
+.rudolph-face {
+  display: block;
+  width: 120px;
+  height: 80px;
+  margin: 0 auto 0.5rem;
+  margin-bottom: 1rem;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
+
+/* 카드 내부 텍스트 */
+.card-title {
+  font-size: 1rem;
+  margin-bottom: 0.5rem;
+  font-weight: bold;
+}
+
+.card-desc {
+  font-size: 0.85rem;
+  background-color: rgba(255, 255, 255, 0.9);
+  color: #333;
+  padding: 1rem 1.5rem;
+  border-radius: 8px;
+  display: inline-block;
+}
+
+.footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background-color: #ffffff;
+  box-shadow: 0 -2px 6px rgba(0, 0, 0, 0.1);
+  z-index: 100;
+}
+
+.nav-bar {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 5px 0;
+}
+
+.nav-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-decoration: none;
+  color: #555;
+  font-size: 12px;
+  transition: all 0.3s ease;
+}
+
+.nav-item .icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background-color: transparent;
+}
+
+.nav-item .icon img {
+  width: 30px;
+  height: 30px;
+}
+
+.nav-item:hover {
+  color: #4caf50;
+}
+
+.nav-item.main {
+  position: relative;
+  bottom: 10px; /* 가운데 아이콘이 약간 위로 올라오도록 */
+}
+
+.nav-item.main .main-icon {
+  width: 60px;
+  height: 60px;
+  padding: 10px;
+  background-color: #16aa42;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 5px 8px rgba(0, 0, 0, 0.2);
+}
+
+.nav-item.main .main-icon img {
+  width: 30px;
+  height: 30px;
+}
+
+.nav-item .label {
+  margin-top: 0px;
+}

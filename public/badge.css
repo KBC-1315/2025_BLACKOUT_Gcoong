@@ -1,0 +1,202 @@
+/* Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f9f9f9;
+  padding: 0 16px 60px; /* Footer 공간 확보 */
+  overflow-x: hidden;
+}
+
+/* Header */
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 16px 0;
+  border-bottom: 1px solid #ddd;
+}
+
+.header h1 {
+  font-size: 20px;
+  margin-left: 16px;
+}
+
+.header .back-btn {
+  background: none;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+/* Main Content */
+.main-content {
+  padding: 16px;
+}
+
+.badge-section p {
+  text-align: left;
+  font-size: 16px;
+  color: #333;
+  margin-bottom: 16px;
+}
+
+.new-badges,
+.all-badges {
+  margin-bottom: 10px;
+  background-color: #fff;
+  border-radius: 10px;
+  /* box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1); /* 그림자 추가 */
+  padding: 16px;
+}
+
+.new-badges h2,
+.all-badges h2 {
+  font-size: 18px;
+  color: #333;
+  margin-bottom: 15px;
+}
+
+/* NEW Badge Styles */
+.new-badge-list {
+  display: flex;
+  justify-content: space-between;
+  gap: 15px;
+}
+
+.new-badge {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: calc(80% - 8px); /* 한 줄에 2개 */
+  text-align: center;
+}
+
+.new-badge img {
+  width: 100px;
+  height: 100px;
+  padding: 10px;
+  border-radius: 10px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.new-badge p {
+  margin-top: 4px;
+  font-size: 16px;
+  color: #333;
+}
+
+/* ALL Badge Styles */
+.all-badge-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  justify-content: space-between;
+  overflow-y: auto;
+}
+
+.all-badge {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: calc(33% - 10px); /* 한 줄에 3개 */
+  text-align: center;
+}
+
+.all-badge img {
+  width: 80px;
+  height: 80px;
+  border-radius: 10px;
+  padding: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.all-badge p {
+  margin-top: 8px;
+  font-size: 12px;
+  color: #333;
+}
+
+.all-badge.locked img {
+  opacity: 0.5;
+}
+
+.all-badge.locked p {
+  color: #aaa;
+}
+
+.footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background-color: #ffffff;
+  box-shadow: 0 -2px 6px rgba(0, 0, 0, 0.1);
+  z-index: 100;
+}
+
+.nav-bar {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 5px 0;
+}
+
+.nav-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-decoration: none;
+  color: #555;
+  font-size: 12px;
+  transition: all 0.3s ease;
+}
+
+.nav-item .icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background-color: transparent;
+}
+
+.nav-item .icon img {
+  width: 30px;
+  height: 30px;
+}
+
+.nav-item:hover {
+  color: #4caf50;
+}
+
+.nav-item.main {
+  position: relative;
+  bottom: 10px; /* 가운데 아이콘이 약간 위로 올라오도록 */
+}
+
+.nav-item.main .main-icon {
+  width: 60px;
+  height: 60px;
+  padding: 10px;
+  background-color: #16aa42;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 5px 8px rgba(0, 0, 0, 0.2);
+}
+
+.nav-item.main .main-icon img {
+  width: 30px;
+  height: 30px;
+}
+
+.nav-item .label {
+  margin-top: 0px;
+}

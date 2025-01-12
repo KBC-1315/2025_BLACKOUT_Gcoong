@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>사진 미리보기</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #e6e6e6;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+      }
+      /* 알림 창 스타일 */
+      .notification {
+        position: fixed;
+        top: -50px; /* 처음에는 화면 위에 숨김 */
+        left: 50%;
+        transform: translateX(-50%);
+        background-color: rgba(0, 128, 0, 0.9); /* 초록색 배경, 약간 투명 */
+        color: white;
+        text-align: center;
+        padding: 20px 20px;
+        border-radius: 8px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+        font-size: 16px;
+        font-weight: bold;
+        z-index: 1000;
+        transition: top 0.5s ease, opacity 0.5s ease;
+      }
+
+      /* 숨긴 상태 */
+      .notification.hidden {
+        top: -50px; /* 화면 밖 */
+        opacity: 0;
+      }
+
+      /* 보이는 상태 */
+      .notification.visible {
+        top: 20px; /* 화면에 보이게 */
+        opacity: 1;
+      }
+
+      .modal {
+        background-color: white;
+        width: 90%;
+        max-width: 400px;
+        border-radius: 20px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+        padding: 20px;
+        text-align: center;
+        position: relative;
+      }
+
+      .modal img {
+        width: 100%;
+        border-radius: 10px;
+        margin: 20px 0;
+      }
+
+      .modal .close-btn {
+        position: absolute;
+        top: 15px;
+        right: 15px;
+        font-size: 20px;
+        cursor: pointer;
+        background: none;
+        border: none;
+      }
+
+      .button-group {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 20px;
+      }
+
+      .button-group button {
+        flex: 1;
+        margin: 0 10px;
+        padding: 10px 20px;
+        background-color: #4caf50;
+        color: white;
+        font-size: 16px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+
+      .button-group button:hover {
+        opacity: 0.9;
+      }
+
+      .button-group button:nth-child(1) {
+        background-color: #4caf50; /* 초록색 - 다시찍기 */
+      }
+
+      .button-group button:nth-child(2) {
+        background-color: #4caf50; /* 빨간색 - 제출하기 */
+      }
+
+      /* 팝업 애니메이션 */
+      .popup {
+        display: none;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%) scale(0.8); /* 초기 크기 축소 */
+        background-color: white;
+        border-radius: 10px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+        padding: 20px;
+        text-align: center;
+        z-index: 1000;
+        width: 90%;
+        max-width: 300px;
+        opacity: 0; /* 초기 투명도 */
+        transition: opacity 0.3s ease, transform 0.3s ease; /* 페이드 및 확대 애니메이션 */
+      }
+
+      .popup.active {
+        opacity: 1; /* 나타나기 */
+        transform: translate(-50%, -50%) scale(1); /* 원래 크기 */
+      }
+
+      .overlay {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+        z-index: 999;
+        opacity: 0; /* 초기 투명도 */
+        transition: opacity 0.3s ease; /* 페이드 애니메이션 */
+      }
+
+      .overlay.active {
+        opacity: 1; /* 나타나기 */
+        display: block;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="notification" class="notification hidden">
+      940포인트 획득!<br />지쿵이 구출에 성공했어요!
+    </div>
+    <!-- 메인 모달 -->
+    <div class="modal">
+      <!-- 닫기 버튼 -->
+      <button class="close-btn" onclick="goBack()">&#x2716;</button>
+
+      <!-- 미리보기 이미지 -->
+      <img id="previewImage" alt="미리보기 사진" />
+
+      <!-- 버튼 그룹 -->
+      <div class="button-group">
+        <button onclick="retakePhoto()">다시찍기</button>
+        <button onclick="showPopup()">제출하기</button>
+      </div>
+    </div>
+
+    <!-- 팝업 창 -->
+    <div class="overlay" id="overlay"></div>
+    <div class="popup" id="popup">
+      <img src="./img/badge.png" alt="도로 위 보안관" />
+      <h3>도로 위 보안관</h3>
+      <p>배지를 획득했습니다!</p>
+      <button onclick="goBack()">확인</button>
+    </div>
+
+    <script>
+      const overlay = document.getElementById("overlay");
+      const popup = document.getElementById("popup");
+
+      // 페이지 로드 시 캡처된 사진 표시
+      window.addEventListener("load", () => {
+        const imageDataUrl = localStorage.getItem("capturedImage");
+        const previewImage = document.getElementById("previewImage");
+        if (imageDataUrl) {
+          previewImage.src = imageDataUrl;
+        } else {
+          previewImage.alt = "사진을 불러올 수 없습니다.";
+          document.querySelector(
+            ".button-group button:nth-child(2)"
+          ).disabled = true; // 제출하기 버튼 비활성화
+        }
+      });
+
+      // 팝업 표시
+      function showPopup() {
+        overlay.classList.add("active");
+        popup.classList.add("active");
+        overlay.style.display = "block"; // 오버레이 표시
+        popup.style.display = "block"; // 팝업 표시
+      }
+
+      // 팝업 닫기
+      function closePopup() {
+        overlay.classList.remove("active");
+        popup.classList.remove("active");
+
+        // 애니메이션 완료 후 팝업 및 오버레이 숨기기
+        setTimeout(() => {
+          overlay.style.display = "none";
+          popup.style.display = "none";
+        }, 300); // 애니메이션 지속 시간과 동일
+      }
+      // 뒤로가기 동작
+      function showNotification(message) {
+        const notification = document.getElementById("notification");
+        notification.innerHTML = message; // 알림 메시지 설정
+        notification.classList.remove("hidden"); // 숨김 클래스 제거
+        notification.classList.add("visible"); // 보임 클래스 추가
+
+        // 3초 후 알림 숨기기
+        setTimeout(() => {
+          notification.classList.remove("visible");
+          notification.classList.add("hidden");
+        }, 3000); // 3000ms = 3초
+      }
+      const earnedPoints = 940;
+
+      // 다시찍기 동작
+      function retakePhoto() {
+        window.location.href = "page3.html";
+      }
+      function goBack() {
+        showNotification(
+          `${earnedPoints}포인트 획득!<br />지쿵이 구출에<br />성공했어요!`
+        );
+        setTimeout(() => {
+          window.location.href = "index.html";
+        }, 1000); // 1000ms = 1초
+      }
+    </script>
+    <script type="module">
+      async function goBack() {
+        // 알림 메시지 표시
+        showNotification(
+          `${earnedPoints}포인트 획득!<br />지쿵이 구출에<br />성공했어요!`
+        );
+        await fetchData();
+        // 1초 후 메인 화면으로 이동
+        setTimeout(() => {
+          window.location.href = "index.html";
+        }, 3000); // 1000ms = 1초
+      }
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/9.17.1/firebase-app.js";
+      import {
+        getFirestore,
+        collection,
+        doc,
+        getDocs,
+        setDoc,
+      } from "https://www.gstatic.com/firebasejs/9.17.1/firebase-firestore.js";
+
+      // Check that it worked and returned a function: // "function"
+      const firebaseConfig = {
+        apiKey: "AIzaSyCrpntgnraatc_6qfSqjzt7uxLEi7lVr8M",
+        authDomain: "gbike-management-sys.firebaseapp.com",
+        projectId: "gbike-management-sys",
+        storageBucket: "gbike-management-sys.firebasestorage.app",
+        messagingSenderId: "340120810848",
+        appId: "1:340120810848:web:ca147b563adcac52051a05",
+        measurementId: "G-0PSVH9KYLG",
+      };
+
+      // Initialize Firebase
+      const app = initializeApp(firebaseConfig);
+      window.bicycleMarkerImage =
+        "https://cdn-icons-png.flaticon.com/512/2223/2223053.png";
+      window.kickboardMarkerImage =
+        "https://cdn-icons-png.flaticon.com/512/5330/5330079.png";
+      // Initialize Cloud Firestore and get a reference to the service
+      const db = getFirestore(app);
+
+      const userList = [];
+
+      async function fetchData() {
+        const dataContainer = document.getElementById("data-container");
+        try {
+          // 유저 데이터 가져옴
+          const querySnapshotUser = await getDocs(collection(db, "users"));
+          querySnapshotUser.forEach((doc) => {
+            const data = doc.data();
+            userList.push(data);
+          });
+
+          window.userList = userList;
+
+          // 현재 유저의 마지막 포인트 가져오기
+          const lastPoint = userList[0]["points"];
+          console.log("Last Point:", lastPoint);
+
+          // earnedPoints를 더한 값 계산
+          const currentPoint = lastPoint + earnedPoints;
+          console.log("Current Point:", currentPoint);
+
+          // Firebase Firestore 업데이트
+
+          var userRef = doc(db, "users", "w2N2Wz5iJyFRRzlqmOu7");
+          console.log(userRef);
+          setDoc(userRef, { points: currentPoint }, { merge: true });
+        } catch (error) {
+          console.error("Error fetching data:", error);
+          dataContainer.textContent = "Error loading data.";
+        }
+      }
+      fetchData();
+    </script>
+  </body>
+</html>

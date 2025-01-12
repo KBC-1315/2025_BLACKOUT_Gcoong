@@ -1,0 +1,229 @@
+body {
+  margin: 0;
+  padding: 0 16px 60px;
+  font-family: Arial, sans-serif;
+}
+
+/* Header section */
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 3px 0;
+  border-bottom: 1px solid #ddd;
+}
+
+.header h1 {
+  font-size: 20px;
+  margin-left: 16px;
+}
+
+.header .back-btn {
+  background: none;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+/* Medals section */
+.medals {
+  display: flex;
+  justify-content: center; /* 중앙 정렬 */
+  gap: 15px; /* 메달 박스 간 간격 */
+  position: relative; /* 메달 이미지 위치 조정을 위한 설정 */
+  padding: 20px 10px; /* 상하 20px, 좌우 10px 패딩 */
+}
+
+.medal-container {
+  position: relative; /* 메달 이미지와 박스를 하나로 묶기 위해 설정 */
+  display: flex;
+  flex-direction: column; /* 세로 정렬 */
+  align-items: center;
+  justify-content: flex-start;
+}
+
+/* 등수별로 높이 조정 */
+.medal-container:nth-child(1) {
+  /* 1등 */
+  margin-top: 18px; /* 가장 위에 위치 */
+}
+
+.medal-container:nth-child(2) {
+  /* 2등 */
+  margin-top: 5px; /* 1등보다 아래 */
+}
+
+.medal-container:nth-child(3) {
+  /* 3등 */
+  margin-top: 30px; /* 2등보다 아래 */
+}
+
+/* Medal images */
+.medal-img {
+  position: absolute; /* 메달 이미지를 박스 위에 고정 */
+  top: -20px; /* 박스 위로 띄우기 */
+  width: 60px; /* 메달 이미지 크기 */
+  height: 60px;
+  z-index: 1; /* 이미지가 박스 위로 나오도록 설정 */
+}
+
+/* Medal boxes */
+.medal-box {
+  text-align: center;
+  font-size: 8px; /* 글자 크기를 줄임 */
+  padding: 10px; /* 내부 여백 줄임 */
+  border-radius: 10px;
+  width: 60px; /* 너비 조정 */
+  height: 80px; /* 높이 조정 */
+  margin-top: 20px; /* 메달 이미지와 박스 간격 */
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* 약간의 그림자 */
+  display: flex; /* 텍스트를 박스 내에서 정렬하기 위해 flexbox 사용 */
+  flex-direction: column;
+  justify-content: center; /* 세로 중앙 정렬 */
+  align-items: center; /* 가로 중앙 정렬 */
+}
+
+.medal-box h3 {
+  margin: 5px 0; /* 위아래 여백 조정 */
+  font-size: 10px; /* 글자 크기 줄임 */
+  font-weight: bold;
+  white-space: nowrap; /* 텍스트를 한 줄로 유지 */
+  overflow: hidden; /* 텍스트가 넘칠 경우 숨김 */
+  text-overflow: ellipsis; /* 넘친 텍스트 생략 표시 (...) */
+}
+
+.medal-box p {
+  color: #e43131;
+  font-size: 10px; /* 숫자의 글자 크기 줄임 */
+  margin: 0;
+  text-align: center; /* 텍스트 가운데 정렬 */
+}
+
+.gold {
+  background-color: #d1e4ff; /* 파란색 박스 */
+}
+
+.silver {
+  background-color: #e5e5e5; /* 회색 박스 */
+}
+
+.bronze {
+  background-color: #ffc7ce; /* 분홍색 박스 */
+}
+
+.medal-box h3 {
+  margin: 10px 0 5px;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.medal-box p {
+  color: #e43131;
+  font-size: 12px;
+  margin: 0;
+}
+.ranking-list {
+  max-height: 250px; /* 한 번에 4명 표시 */
+  overflow-y: auto; /* 세로 스크롤 활성화 */
+  background-color: #ffffff; /* 박스 내부 배경색 */
+  border: 1px solid #ddd; /* 박스 테두리 */
+  border-radius: 8px; /* 둥근 모서리 */
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* 그림자 */
+  padding: 10px; /* 내부 여백 */
+  width: 300px;
+  margin: 0 auto;
+}
+
+.ranking-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: centebr;
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+}
+
+.ranking-item p {
+  margin: 0;
+}
+
+.nickname {
+  font-size: 14px;
+  color: #333;
+}
+
+.points {
+  font-size: 12px;
+  color: #e43131;
+}
+
+.footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background-color: #ffffff;
+  box-shadow: 0 -2px 6px rgba(0, 0, 0, 0.1);
+  z-index: 100;
+}
+
+.nav-bar {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 5px 0;
+}
+
+.nav-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-decoration: none;
+  color: #555;
+  font-size: 12px;
+  transition: all 0.3s ease;
+}
+
+.nav-item .icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background-color: transparent;
+}
+
+.nav-item .icon img {
+  width: 30px;
+  height: 30px;
+}
+
+.nav-item:hover {
+  color: #4caf50;
+}
+
+.nav-item.main {
+  position: relative;
+  bottom: 10px; /* 가운데 아이콘이 약간 위로 올라오도록 */
+}
+
+.nav-item.main .main-icon {
+  width: 40px;
+  height: 40px;
+  padding: 10px;
+  background-color: #16aa42;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 5px 8px rgba(0, 0, 0, 0.2);
+}
+
+.nav-item.main .main-icon img {
+  width: 30px;
+  height: 30px;
+}
+
+.nav-item .label {
+  margin-top: 0px;
+}
